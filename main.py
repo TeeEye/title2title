@@ -6,13 +6,15 @@ import time
 
 
 def find_nearest(title, title_dict):
+    if title is None:
+        return None
     if title in title_dict:
         return title_dict[title]
 
-    min_dist = EDIT_DISTANCE_THRESHOLD
+    min_dist = EDIT_DISTANCE_RATIO_THRESHOLD
     res = None
     for key in title_dict.keys():
-        dist = distance(title, key)
+        dist = distance(title, key) / max(len(title), len(key))
         if dist < min_dist:
             min_dist = dist
             res = title_dict[key]
