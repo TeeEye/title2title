@@ -28,10 +28,12 @@ def run():
         print('Title data loaded')
 
     standard_title = []
-    for idx, row in jobs.iterrows():
+    idx = 0
+    for _, row in jobs.iterrows():
+        idx += 1
         title = normalize(row['job_title'])
         standard_title.append(find_nearest(title, title_dict))
-        if idx % 1000 == 0 or idx == (len(jobs)-1):
+        if idx % 1000 == 0 or idx == len(jobs):
             print('\rProcessing %.3f%%...   ' % (100 * idx/len(jobs)), end='')
     print('Done!')
 
